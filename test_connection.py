@@ -6,10 +6,16 @@ load_dotenv()
 from langsmith import Client
 from openai import OpenAI
 
-ls_client = Client()
-oai_client = OpenAI()
+try:
+    ls_client = Client()
+    print("✅ LangSmith verbunden")
+except Exception as e:
+    print(f"❌ LangSmith Fehler: {e}")
 
-projects = list(ls_client.list_projects())
-print(f"✅ LangSmith verbunden – {len(projects)} Projekte gefunden")
+try:
+    oai_client = OpenAI()
+    print("✅ OpenAI verbunden")
+except Exception as e:
+    print(f"❌ OpenAI Fehler: {e}")
+
 print(f"Project: {os.environ.get('LANGCHAIN_PROJECT')}")
-EOF
